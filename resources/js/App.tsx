@@ -46,14 +46,14 @@ const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   const { loading, error } = useApp();
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--bg)] text-[var(--text-p)] font-sans transition-colors duration-200">
+    <div className="flex flex-col min-h-screen bg-[var(--bg)] text-[var(--text-p)] font-sans transition-colors duration-200 public-site-bg">
       <Navbar />
       {error && (
         <div className="bg-red-500/10 border-b border-red-500/20 text-red-600 text-center text-sm py-2 px-4">
           {error}
         </div>
       )}
-      <main className="flex-grow pt-14">
+      <main className="flex-grow pt-[4.25rem]">
         {loading ? (
           <div className="flex items-center justify-center min-h-[50vh]">
             <Loader2 className="w-8 h-8 animate-spin text-[var(--accent)]" />

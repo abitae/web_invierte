@@ -23,11 +23,13 @@ class CmsContentSeeder extends Seeder
         if (SiteSetting::query()->count() === 0) {
             SiteSetting::query()->create([
                 'id' => 1,
-                'site_name' => 'Invierte Express',
-                'site_tagline' => 'Tu inversión en lotes, al instante',
-                'browser_title' => 'Invierte Express | Lotes con respaldo registral',
-                'footer_tagline' => 'Tu inversión en lotes, al instante',
-                'footer_description' => 'Invierte Express — lotes con respaldo registral y financiamiento directo en todo el Perú.',
+                'logo_url' => '/images/logo-invierte-xpress.png',
+                'favicon_url' => '/images/logo-invierte-xpress.png',
+                'site_name' => '',
+                'site_tagline' => '',
+                'browser_title' => 'Invierte Xpress | Lotes con respaldo registral',
+                'footer_tagline' => 'Invierte Rápido, Asegura Tu futuro',
+                'footer_description' => 'Invierte Xpress — lotes con respaldo registral y financiamiento directo en todo el Perú.',
             ]);
         }
 
@@ -90,7 +92,7 @@ class CmsContentSeeder extends Seeder
             AboutPage::query()->create([
                 'id' => 1,
                 'hero_eyebrow' => 'Nosotros',
-                'hero_heading' => 'Invierte Express',
+                'hero_heading' => 'Invierte Xpress',
                 'hero_description' => 'Tu inversión en lotes con respaldo registral.',
                 'hero_background_image_url' => 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1600',
                 'mission_heading' => 'Misión',
@@ -118,7 +120,7 @@ class CmsContentSeeder extends Seeder
         if (Banner::query()->count() === 0) {
             Banner::query()->create([
                 'id' => 'banner-1',
-                'title' => 'Invierte en lotes con Invierte Express',
+                'title' => 'Invierte en lotes con Invierte Xpress',
                 'subtitle' => 'Lotes playeros, campestres y urbanos inscritos en SUNARP.',
                 'button_text' => 'Ver Catálogo de Proyectos',
                 'image_url' => 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=1600',

@@ -96,97 +96,54 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <div id="home-page" className="-mt-14">
+    <div id="home-page" className="-mt-[4.25rem]">
       <HomeAlertModal />
       {/* 1. HERO CAROUSEL */}
-      <section className="relative min-h-[85vh] lg:min-h-[90vh] flex items-center bg-[var(--bg)] border-b border-[var(--border)] overflow-hidden pt-28 pb-12 lg:pt-36 lg:pb-20">
-        {/* Ambient Panoramic Background Banner Image */}
+      <section className="relative min-h-[88vh] flex items-center overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24">
         <div className="absolute inset-0 transition-all duration-1000 select-none">
           <img
             src={activeBanner.imageUrl}
             alt=""
             aria-hidden
-            className="hero-banner-bg-image w-full h-full object-cover"
+            className="hero-banner-bg-image w-full h-full object-cover scale-105"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 hero-banner-scrim" />
-          <div className="absolute inset-0 hero-banner-scrim-vertical" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg)] via-[var(--bg)]/85 to-[var(--bg)]/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-transparent to-transparent" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-[var(--accent)]/8 via-transparent to-transparent pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: Content */}
-            <div className="hero-banner-content-panel lg:col-span-7 space-y-6 text-left rounded-2xl p-6 sm:p-8">
-              {activeBanner.badgeText && (
-                <div className="hero-banner-badge inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono tracking-widest uppercase font-bold">
-                  <Sparkles className="w-3.5 h-3.5 text-white shrink-0" aria-hidden />
-                  {activeBanner.badgeText}
-                </div>
-              )}
-              
-              <h1 className="hero-banner-title text-4xl sm:text-5xl lg:text-5xl font-sans font-extrabold leading-tight tracking-tight">
-                {activeBanner.title}
-              </h1>
-
-              <p className="hero-banner-subtitle text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl font-normal">
-                {activeBanner.subtitle}
-              </p>
-
-              <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                <Link
-                  to="/catalog"
-                  className="inline-flex justify-center items-center gap-2 bg-[var(--accent)] hover:bg-[#008c4a] text-white font-sans font-semibold text-sm px-7 py-3.5 rounded-lg transition-transform hover:-translate-y-0.5 shadow-lg active:scale-95"
-                >
-                  <Compass className="w-4 h-4 text-white animate-spin-slow" />
-                  {activeBanner.buttonText === "Explorar catálogo" ? "Explorar proyectos" : activeBanner.buttonText}
-                </Link>
-                <Link
-                  to="/contact"
-                  className="inline-flex justify-center items-center gap-2 bg-[var(--card-bg)] hover:bg-[var(--border)] text-[var(--text-p)] border-2 border-[var(--border)] font-sans font-semibold text-sm px-7 py-3.5 rounded-lg transition-all shadow-md"
-                >
-                  <PhoneCall className="w-4 h-4 text-[var(--accent)]" />
-                  Solicitar Asesoría
-                </Link>
+          <div className="max-w-2xl lg:max-w-3xl hero-banner-content-panel p-8 sm:p-10 space-y-6">
+            {activeBanner.badgeText && (
+              <div className="hero-banner-badge inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold">
+                <Sparkles className="w-3.5 h-3.5 shrink-0" aria-hidden />
+                {activeBanner.badgeText}
               </div>
-            </div>
+            )}
 
-            {/* Right Column: Layered Reduced-Width & Superposed Images */}
-            <div className="lg:col-span-5 relative flex justify-center items-center h-[350px] sm:h-[450px] lg:h-[480px]">
-              {/* Primary Background Image Container (Reduced width) */}
-              <div className="w-[72%] h-[82%] rounded-2xl overflow-hidden shadow-2xl border border-[var(--border)] relative z-10 transition-all duration-300 hover:scale-101">
-                <img
-                  src={activeBanner.imageUrl}
-                  alt={activeBanner.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
-              </div>
+            <h1 className="hero-banner-title text-4xl sm:text-5xl lg:text-6xl leading-[1.08]">
+              {activeBanner.title}
+            </h1>
 
-              {/* Secondary Overlapping / Superposed Image on the Right */}
-              <div className="absolute right-0 bottom-4 sm:bottom-10 w-[45%] h-[55%] rounded-xl overflow-hidden shadow-2xl border-2 border-[var(--card-bg)] z-20 transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                <img
-                  src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80"
-                  alt="Vista del Lote"
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-              </div>
+            <p className="hero-banner-subtitle text-base sm:text-lg leading-relaxed max-w-xl">
+              {activeBanner.subtitle}
+            </p>
 
-              {/* Decorative dynamic badge */}
-              <div className="absolute left-[-10px] bottom-12 bg-[var(--accent)] text-white px-3 py-1.5 rounded shadow-xl z-25 font-mono text-[10px] flex items-center gap-2">
-                <Sparkles className="w-3 h-3 text-white" />
-                <span className="font-extrabold tracking-wider">ENTREGA INMEDIATA</span>
-              </div>
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+              <Link to="/catalog" className="ie-btn-primary">
+                <Compass className="w-4 h-4" />
+                {activeBanner.buttonText === "Explorar catálogo" ? "Explorar proyectos" : activeBanner.buttonText}
+              </Link>
+              <Link to="/contact" className="ie-btn-secondary">
+                <PhoneCall className="w-4 h-4 text-[var(--accent)]" />
+                Solicitar asesoría
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* Carousel Slider Controls */}
         {activeBanners.length > 1 && (
-          <div className="hero-banner-controls absolute bottom-6 right-4 sm:right-10 flex items-center gap-2 z-10 px-2 py-1.5 rounded-lg border border-[var(--border)]">
+          <div className="hero-banner-controls absolute bottom-8 right-6 sm:right-10 flex items-center gap-2 z-10 px-3 py-2 rounded-full border border-[var(--border)]">
             <button
               onClick={handleBannerPrev}
               className="p-1.5 rounded-md bg-[var(--card-bg)] hover:bg-[var(--border)] text-[var(--text-p)] border border-[var(--border)] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
@@ -208,60 +165,47 @@ export const Home: React.FC = () => {
         )}
       </section>
 
-      {/* 2. STATS BAR */}
-      <section className="bg-stone-100 border-y border-stone-200/60 py-8 relative -mt-6 z-10 max-w-6xl mx-auto rounded-xl premium-card-shadow px-4 sm:px-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div className="space-y-1">
-            <div className="text-3xl font-sans font-extrabold text-emerald-950">98%</div>
-            <div className="text-[10px] font-mono text-stone-500 uppercase tracking-widest font-semibold">
-              Clientes Satisfechos
-            </div>
+      <section className="relative z-10 max-w-5xl mx-auto px-4 -mt-10 mb-4">
+        <div className="ie-stat-bar grid grid-cols-2 md:grid-cols-4 gap-6 py-8 px-6 sm:px-10">
+          <div className="text-center space-y-1">
+            <div className="ie-stat-value">98%</div>
+            <div className="text-xs text-[var(--text-muted)] font-medium">Clientes satisfechos</div>
           </div>
-          <div className="space-y-1">
-            <div className="text-3xl font-sans font-extrabold text-emerald-950">S/. 50M+</div>
-            <div className="text-[10px] font-mono text-stone-500 uppercase tracking-widest font-semibold">
-              Capitalizado en Lotes
-            </div>
+          <div className="text-center space-y-1">
+            <div className="ie-stat-value">S/. 50M+</div>
+            <div className="text-xs text-[var(--text-muted)] font-medium">Capital invertido</div>
           </div>
-          <div className="space-y-1">
-            <div className="text-3xl font-sans font-extrabold text-emerald-950">1,200+</div>
-            <div className="text-[10px] font-mono text-stone-500 uppercase tracking-widest font-semibold">
-              Lotes Adjudicados
-            </div>
+          <div className="text-center space-y-1">
+            <div className="ie-stat-value">1,200+</div>
+            <div className="text-xs text-[var(--text-muted)] font-medium">Lotes vendidos</div>
           </div>
-          <div className="space-y-1">
-            <div className="text-3xl font-sans font-extrabold text-emerald-950">30 hrs</div>
-            <div className="text-[10px] font-mono text-stone-500 uppercase tracking-widest font-semibold">
-              Visitas Guiadas Semanales
-            </div>
+          <div className="text-center space-y-1">
+            <div className="ie-stat-value">30+</div>
+            <div className="text-xs text-[var(--text-muted)] font-medium">Visitas guiadas al mes</div>
           </div>
         </div>
       </section>
 
-      {/* 3. FEATURED PROJECTS */}
-      <section className="relative border-y border-[var(--border)] bg-[var(--card-bg)] py-16 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent)]/[0.04] via-transparent to-amber-500/[0.03] pointer-events-none" />
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg)] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12 md:mb-14">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
             <div className="space-y-3 max-w-2xl">
-              <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--accent-text)] tracking-widest uppercase font-semibold">
+              <span className="ie-eyebrow">
                 <Compass className="w-3.5 h-3.5" />
-                Catálogo
+                Catálogo destacado
               </span>
-              <h2 className="text-3xl md:text-4xl font-sans font-extrabold text-[var(--text-p)] leading-tight tracking-tight">
-                Conoce nuestros Proyectos
+              <h2 className="ie-heading text-3xl md:text-4xl">
+                Proyectos para tu próxima inversión
               </h2>
-              <p className="text-[var(--text-s)] text-sm leading-relaxed font-light">
-                Terrenos con título SUNARP, ubicaciones estratégicas y opciones de financiamiento directo. Elige el proyecto que mejor se adapte a tu inversión.
+              <p className="text-[var(--text-s)] text-sm leading-relaxed">
+                Terrenos con respaldo SUNARP, ubicaciones estratégicas y financiamiento directo.
               </p>
             </div>
-            <Link
-              to="/catalog"
-              className="group shrink-0 inline-flex items-center gap-2 bg-[var(--accent)] hover:bg-[#008c4a] text-white font-sans font-semibold text-xs px-5 py-3 rounded-lg transition-all shadow-md hover:-translate-y-0.5"
-            >
+            <Link to="/catalog" className="ie-btn-primary shrink-0 !text-sm">
               Ver catálogo completo
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -287,29 +231,25 @@ export const Home: React.FC = () => {
         )}
       </section>
 
-      {/* 4. WHY INVEST SECTION WITH AN IMAGE BACKGROUND */}
-      <section className="home-guarantees-section relative py-20 md:py-28 border-y border-emerald-900/40 overflow-hidden">
+      <section className="home-guarantees-section relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 z-0 select-none">
           <img
             src={guaranteeData.section.backgroundImageUrl}
             alt=""
             aria-hidden
-            className="w-full h-full object-cover brightness-[0.4] saturate-[1.05]"
+            className="w-full h-full object-cover brightness-[0.35]"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-950/96 via-emerald-900/94 to-teal-900/90" />
-          <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 via-transparent to-emerald-800/30" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0C356A]/95 via-[#0A2A4A]/92 to-[#061A30]/90" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto space-y-4 mb-14 md:mb-16">
-            <span className="inline-flex items-center gap-2 font-mono text-xs text-emerald-200 tracking-widest uppercase font-bold px-3 py-1 rounded-full bg-emerald-400/15 border border-emerald-300/30">
-              {guaranteeData.section.eyebrow}
-            </span>
-            <h2 className="text-3xl md:text-4xl font-sans font-extrabold text-white leading-tight drop-shadow-sm">
+          <div className="text-center max-w-2xl mx-auto space-y-4 mb-14">
+            <span className="ie-eyebrow justify-center">{guaranteeData.section.eyebrow}</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white leading-tight">
               {guaranteeData.section.heading}
             </h2>
-            <p className="text-emerald-50/95 text-sm md:text-base font-normal leading-relaxed max-w-xl mx-auto">
+            <p className="text-blue-100/90 text-sm md:text-base leading-relaxed">
               {guaranteeData.section.description}
             </p>
           </div>
@@ -320,13 +260,13 @@ export const Home: React.FC = () => {
                 key={item.id}
                 className="home-guarantees-card p-8 rounded-2xl space-y-4 transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="home-guarantees-icon w-14 h-14 rounded-xl flex items-center justify-center">
+                <div className="home-guarantees-icon w-14 h-14 rounded-2xl flex items-center justify-center">
                   <GuaranteeIcon name={item.icon} className="w-7 h-7" />
                 </div>
-                <h3 className="font-sans font-bold text-lg text-white leading-snug">
+                <h3 className="font-display font-semibold text-lg text-white leading-snug">
                   {item.title}
                 </h3>
-                <p className="text-emerald-50/90 text-sm font-normal leading-relaxed">
+                <p className="text-blue-100/85 text-sm leading-relaxed">
                   {item.description}
                 </p>
               </div>
@@ -335,17 +275,14 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. TESTIMONIALS SLIDER SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="text-center max-w-2xl mx-auto space-y-3 mb-16">
-          <span className="font-mono text-xs text-amber-700 tracking-widest uppercase font-semibold block">
-            Historias de Éxito
-          </span>
-          <h2 className="text-3xl font-sans font-extrabold text-emerald-950">
-            Ellos ya confiaron en Lotesenremate.pe
+        <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
+          <span className="ie-eyebrow justify-center">Historias de éxito</span>
+          <h2 className="ie-heading text-3xl md:text-4xl">
+            Inversionistas que confían en Invierte Xpress
           </h2>
-          <p className="text-stone-500 text-xs md:text-sm font-light">
-            Inversionistas locales, profesionales independientes y familias peruanas expresan su recomendación sincera.
+          <p className="text-[var(--text-s)] text-sm">
+            Familias y emprendedores que ya dieron el paso hacia su patrimonio.
           </p>
         </div>
 
@@ -353,40 +290,32 @@ export const Home: React.FC = () => {
           {testimonials.map((test) => (
             <div
               key={test.id}
-              className="bg-white p-8 rounded-xl border border-stone-200 hover:border-emerald-650/40 transition-colors premium-card-shadow relative flex flex-col justify-between"
+              className="ie-card p-8 relative flex flex-col justify-between hover:shadow-[var(--shadow-soft)] transition-shadow"
             >
               <div className="space-y-4">
-                {/* Stars and quote icon */}
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 text-[var(--gold)] text-lg">
                   {[...Array(test.stars)].map((_, i) => (
-                    <span key={i} className="text-amber-500 text-lg">
-                      ★
-                    </span>
+                    <span key={i}>★</span>
                   ))}
                 </div>
-                <blockquote className="text-sm font-sans text-stone-600 font-light italic leading-relaxed">
+                <blockquote className="text-sm text-[var(--text-s)] italic leading-relaxed">
                   "{test.quote}"
                 </blockquote>
               </div>
 
-              {/* Client Info footer */}
-              <div className="flex items-center gap-3.5 pt-6 mt-6 border-t border-stone-100">
+              <div className="flex items-center gap-3.5 pt-6 mt-6 border-t border-[var(--border)]">
                 <img
                   src={test.avatarUrl}
                   alt={test.name}
-                  className="w-10 h-10 rounded-full object-cover border-2 border-stone-100 shrink-0"
+                  className="w-11 h-11 rounded-full object-cover ring-2 ring-[var(--gold)]/30 shrink-0"
                   referrerPolicy="no-referrer"
                 />
                 <div>
-                  <h4 className="font-sans font-bold text-xs text-stone-900 leading-none">
-                    {test.name}
-                  </h4>
-                  <span className="text-[10px] text-stone-400 font-mono tracking-tight block mt-0.5">
-                    {test.role}
+                  <h4 className="font-semibold text-sm text-[var(--text-p)]">{test.name}</h4>
+                  <span className="text-xs text-[var(--text-muted)] block">{test.role}</span>
+                  <span className="inline-block mt-1 text-[10px] font-medium text-[var(--accent)] bg-[var(--accent)]/8 px-2 py-0.5 rounded-full">
+                    {test.projectPurchased}
                   </span>
-                  <div className="inline-block bg-emerald-50 text-emerald-850 px-1.5 py-0.5 rounded text-3xs font-medium font-mono mt-1">
-                    Adquirió {test.projectPurchased}
-                  </div>
                 </div>
               </div>
             </div>
@@ -416,20 +345,18 @@ export const Home: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Informative column */}
             <div className="space-y-6 text-white">
-              <span className="inline-flex items-center gap-2 font-mono text-xs text-amber-300 tracking-wider font-bold uppercase px-3 py-1 rounded-full bg-amber-400/15 border border-amber-300/25">
-                {contactForm.sectionEyebrow}
-              </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-sans font-extrabold tracking-tight leading-tight text-white drop-shadow-sm">
+              <span className="ie-eyebrow">{contactForm.sectionEyebrow}</span>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white">
                 {contactForm.sectionHeading}
               </h2>
-              <p className="text-emerald-50/95 text-sm sm:text-base font-normal leading-relaxed max-w-lg">
+              <p className="text-blue-100/90 text-sm sm:text-base leading-relaxed max-w-lg">
                 {contactForm.sectionDescription}
               </p>
 
-              <div className="space-y-4 pt-6 border-t border-emerald-400/30">
+              <div className="space-y-4 pt-6 border-t border-white/15">
                 {(contactForm.bullets ?? []).map((bullet, idx) => (
-                  <div key={idx} className="flex items-start gap-3 text-sm sm:text-base text-white">
-                    <CheckCircle className="w-5 h-5 text-amber-300 shrink-0 mt-0.5" aria-hidden />
+                  <div key={idx} className="flex items-start gap-3 text-sm text-white/95">
+                    <CheckCircle className="w-5 h-5 text-[var(--gold)] shrink-0 mt-0.5" aria-hidden />
                     <span className="leading-relaxed">{renderInlineBold(bullet.text)}</span>
                   </div>
                 ))}
@@ -439,8 +366,8 @@ export const Home: React.FC = () => {
             {/* Form card column */}
             <div className="home-contact-form-card p-7 sm:p-10 rounded-2xl text-stone-900 overflow-hidden">
               <div className="home-contact-form-card__header-accent" aria-hidden />
-              <div className="mb-7 pb-6 border-b border-emerald-100/80 relative">
-                <h3 className="font-sans font-extrabold text-xl sm:text-2xl text-emerald-950 tracking-tight mb-2">
+              <div className="mb-7 pb-6 border-b border-[var(--border)] relative">
+                <h3 className="font-display font-bold text-xl sm:text-2xl text-[var(--text-p)] mb-2">
                   {contactForm.formTitle}
                 </h3>
                 <p className="text-sm text-stone-600 leading-relaxed">
@@ -449,14 +376,14 @@ export const Home: React.FC = () => {
               </div>
 
               {formSuccess ? (
-                <div className="bg-emerald-50 border-2 border-emerald-200 text-emerald-900 rounded-xl p-8 text-center space-y-3">
-                  <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mx-auto text-emerald-700">
+                <div className="bg-[var(--accent)]/8 border-2 border-[var(--accent)]/20 text-[var(--accent)] rounded-2xl p-8 text-center space-y-3">
+                  <div className="w-14 h-14 bg-[var(--gold)]/20 rounded-full flex items-center justify-center mx-auto text-[var(--accent)]">
                     <UserCheck className="w-7 h-7" />
                   </div>
                   <h4 className="font-sans font-extrabold text-base uppercase tracking-wide">
                     {contactForm.successTitle}
                   </h4>
-                  <p className="text-sm font-normal text-emerald-800/90 leading-relaxed">
+                  <p className="text-sm font-normal text-[var(--accent-text)] leading-relaxed">
                     {contactForm.successMessage}
                   </p>
                 </div>

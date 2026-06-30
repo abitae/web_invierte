@@ -25,7 +25,7 @@ export const ExpertAdvisorsCarousel: React.FC<{ advisors: ExpertAdvisor[] }> = (
 
   if (advisors.length === 0) {
     return (
-      <p className="text-center text-stone-400 text-xs font-light py-8">
+      <p className="text-center text-[var(--text-muted)] text-xs py-8">
         Próximamente publicaremos el equipo de asesores expertos.
       </p>
     );
@@ -40,8 +40,8 @@ export const ExpertAdvisorsCarousel: React.FC<{ advisors: ExpertAdvisor[] }> = (
       className="relative w-full overflow-hidden"
       aria-label="Carrusel de asesores expertos"
     >
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-24 bg-gradient-to-r from-[var(--bg)] via-[var(--bg)]/80 to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-24 bg-gradient-to-l from-[var(--bg)] via-[var(--bg)]/80 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 sm:w-24 bg-gradient-to-r from-[var(--bg-subtle)] via-[var(--bg-subtle)]/80 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 sm:w-24 bg-gradient-to-l from-[var(--bg-subtle)] via-[var(--bg-subtle)]/80 to-transparent" />
 
       <div
         className="expert-advisors-marquee-track flex w-max gap-8 py-2"
@@ -55,24 +55,25 @@ export const ExpertAdvisorsCarousel: React.FC<{ advisors: ExpertAdvisor[] }> = (
         {loopItems.map((advisor, index) => (
           <article
             key={`${advisor.id}-${index}`}
-            className="shrink-0 w-[300px] bg-white rounded-xl border border-stone-200/60 overflow-hidden premium-card-shadow text-left group"
+            className="shrink-0 w-[300px] ie-card overflow-hidden text-left group"
           >
-            <div className="h-64 bg-stone-100 overflow-hidden">
+            <div className="h-64 bg-[var(--bg-subtle)] overflow-hidden relative">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[var(--accent)] via-[var(--gold)] to-[var(--accent)] opacity-0 group-hover:opacity-100 transition-opacity" />
               <img
                 src={advisor.imageUrl}
                 alt={advisor.name}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
                 referrerPolicy="no-referrer"
                 loading="lazy"
                 draggable={false}
               />
             </div>
             <div className="p-5 space-y-1">
-              <h3 className="font-sans font-bold text-sm text-stone-850">{advisor.name}</h3>
-              <span className="text-3xs font-mono font-bold text-amber-700 uppercase tracking-widest block">
+              <h3 className="font-display font-semibold text-sm text-[var(--text-p)]">{advisor.name}</h3>
+              <span className="text-[10px] font-bold text-[var(--gold)] uppercase tracking-widest block">
                 {advisor.role}
               </span>
-              <p className="text-stone-400 text-3xs font-light leading-relaxed pt-2 line-clamp-4">{advisor.bio}</p>
+              <p className="text-[var(--text-s)] text-xs leading-relaxed pt-2 line-clamp-4">{advisor.bio}</p>
             </div>
           </article>
         ))}

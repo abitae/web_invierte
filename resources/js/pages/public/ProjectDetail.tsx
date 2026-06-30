@@ -125,7 +125,7 @@ export const ProjectDetail: React.FC = () => {
   }
 
   return (
-    <div id="project-detail-page" className="pt-10 min-h-screen bg-[var(--bg)]">
+    <div id="project-detail-page" className="ie-page-shell">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Columna principal */}
@@ -146,27 +146,27 @@ export const ProjectDetail: React.FC = () => {
                   )}
                 </div>
               )}
-              <h1 className="text-2xl sm:text-3xl font-sans font-extrabold text-[var(--text-p)] leading-tight tracking-tight">
+              <h1 className="ie-heading text-2xl sm:text-3xl leading-tight">
                 {project.title}
               </h1>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="rounded-xl border border-[var(--border)] bg-[var(--card-bg)] px-4 py-3">
+                <div className="ie-stat-bar px-4 py-3">
                   <span className="block text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest">Precio</span>
                   <strong className="block text-base font-extrabold text-[var(--accent-text)] mt-0.5">
                     {project.priceSoles > 0 ? `S/. ${project.priceSoles.toLocaleString()}` : "Consultar"}
                   </strong>
                 </div>
-                <div className="rounded-xl border border-[var(--border)] bg-[var(--card-bg)] px-4 py-3">
+                <div className="ie-stat-bar px-4 py-3">
                   <span className="block text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest">Libres</span>
                   <strong className="block text-base font-extrabold text-[var(--text-p)] mt-0.5">{project.availableLots}</strong>
                 </div>
-                <div className="rounded-xl border border-[var(--border)] bg-[var(--card-bg)] px-4 py-3">
+                <div className="ie-stat-bar px-4 py-3">
                   <span className="block text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest">Total</span>
                   <strong className="block text-base font-extrabold text-[var(--text-p)] mt-0.5">{project.totalLots}</strong>
                 </div>
                 {(project.surface ?? 0) > 0 && (
-                  <div className="rounded-xl border border-[var(--border)] bg-[var(--card-bg)] px-4 py-3">
+                  <div className="ie-stat-bar px-4 py-3">
                     <span className="block text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest">Área</span>
                     <strong className="block text-base font-extrabold text-[var(--text-p)] mt-0.5">{project.surface} m²</strong>
                   </div>
@@ -176,8 +176,8 @@ export const ProjectDetail: React.FC = () => {
 
             {/* Descripción */}
             {project.description && (
-              <section className="rounded-2xl border border-[var(--border)] bg-[var(--card-bg)] p-5 sm:p-6 space-y-3">
-                <h2 className="font-sans font-bold text-sm uppercase tracking-wider text-[var(--text-p)]">
+              <section className="ie-card p-5 sm:p-6 space-y-3">
+                <h2 className="ie-heading text-sm uppercase tracking-wider">
                   Sobre el proyecto
                 </h2>
                 <p className="text-[var(--text-s)] text-sm font-light leading-relaxed whitespace-pre-line">
@@ -187,10 +187,10 @@ export const ProjectDetail: React.FC = () => {
             )}
 
             {/* Google Maps */}
-            <section className="rounded-2xl border border-[var(--border)] bg-[var(--card-bg)] overflow-hidden shadow-sm">
+            <section className="ie-card overflow-hidden">
               <div className="px-5 py-4 border-b border-[var(--border)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                 <div>
-                  <h2 className="font-sans font-bold text-sm uppercase tracking-wider text-[var(--text-p)] flex items-center gap-2">
+                  <h2 className="ie-heading text-sm uppercase tracking-wider flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-[var(--accent-text)]" />
                     Ubicación
                   </h2>
@@ -237,12 +237,10 @@ export const ProjectDetail: React.FC = () => {
           {/* Sidebar contacto */}
           <aside className="lg:col-span-5 xl:col-span-4">
             <div className="sticky top-24">
-              <div className="rounded-2xl border border-[var(--border)] bg-[var(--card-bg)] p-6 shadow-lg space-y-5">
+              <div className="ie-card p-6 space-y-5">
                 <div className="space-y-1 pb-4 border-b border-[var(--border)]">
-                  <span className="font-mono text-[10px] text-[var(--accent-text)] uppercase tracking-widest font-semibold">
-                    Consulta este proyecto
-                  </span>
-                  <h3 className="font-sans font-extrabold text-lg text-[var(--text-p)] leading-snug">
+                  <span className="ie-eyebrow">Consulta este proyecto</span>
+                  <h3 className="ie-heading text-lg leading-snug mt-2">
                     {contactForm.formTitle}
                   </h3>
                   <p className="text-xs text-[var(--text-s)] font-light leading-relaxed">{contactForm.formSubtitle}</p>
@@ -254,9 +252,11 @@ export const ProjectDetail: React.FC = () => {
                 </div>
 
                 {formSuccess ? (
-                  <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 text-center space-y-2">
-                    <Check className="w-8 h-8 text-[var(--accent-text)] mx-auto" />
-                    <p className="font-semibold text-sm text-[var(--text-p)]">{contactForm.successTitle}</p>
+                  <div className="ie-success-box space-y-2">
+                    <div className="ie-success-box__icon">
+                      <Check className="w-6 h-6" />
+                    </div>
+                    <p className="font-semibold text-sm">{contactForm.successTitle}</p>
                     <p className="text-xs text-[var(--text-s)]">{contactForm.successMessage}</p>
                   </div>
                 ) : (
@@ -267,7 +267,7 @@ export const ProjectDetail: React.FC = () => {
                       placeholder="Nombres completos"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full bg-[var(--bg)] border border-[var(--border)] focus:border-[var(--accent)] rounded-lg p-2.5 text-xs outline-none transition-colors text-[var(--text-p)]"
+                      className="ie-form-input"
                     />
                     <input
                       type="tel"
@@ -275,7 +275,7 @@ export const ProjectDetail: React.FC = () => {
                       placeholder="Teléfono / WhatsApp"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full bg-[var(--bg)] border border-[var(--border)] focus:border-[var(--accent)] rounded-lg p-2.5 text-xs outline-none transition-colors text-[var(--text-p)]"
+                      className="ie-form-input"
                     />
                     <input
                       type="email"
@@ -283,19 +283,16 @@ export const ProjectDetail: React.FC = () => {
                       placeholder="Correo electrónico"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-[var(--bg)] border border-[var(--border)] focus:border-[var(--accent)] rounded-lg p-2.5 text-xs outline-none transition-colors text-[var(--text-p)]"
+                      className="ie-form-input"
                     />
                     <textarea
                       rows={3}
                       placeholder="Tu consulta sobre este proyecto..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full bg-[var(--bg)] border border-[var(--border)] focus:border-[var(--accent)] rounded-lg p-2.5 text-xs outline-none transition-colors resize-none text-[var(--text-p)]"
+                      className="ie-form-input resize-none"
                     />
-                    <button
-                      type="submit"
-                      className="w-full inline-flex items-center justify-center gap-2 bg-[var(--accent)] hover:bg-[#008c4a] text-white font-bold text-xs py-3 rounded-lg uppercase tracking-wider transition-colors"
-                    >
+                    <button type="submit" className="ie-btn-primary w-full text-xs uppercase tracking-wider py-3">
                       <Send className="w-4 h-4" />
                       {contactForm.submitLabel}
                     </button>

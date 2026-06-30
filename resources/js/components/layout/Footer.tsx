@@ -5,7 +5,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, CheckCircle2 } from "lucide-react";
+import { Phone, Mail, MapPin, Shield } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import { DEFAULT_SITE_SETTINGS } from "../../config/siteDefaults";
 import { BrandLogo } from "../BrandLogo";
@@ -29,72 +29,65 @@ export const Footer: React.FC = () => {
   const activeChannels = channels.filter((c) => c.isActive && c.channelType !== "whatsapp");
 
   return (
-    <footer id="public-footer" className="bg-[#09090b] text-[#a1a1aa] border-t border-[#27272a] select-none font-sans">
-      <div className="bg-[#18181b] border-b border-[#27272a] py-2 text-[#fafafa]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs font-medium tracking-wide">
-          <span className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-[var(--accent)]" />
-            Todos nuestros lotes constan con Título de Propiedad inscrito en SUNARP.
+    <footer id="public-footer" className="ie-footer select-none font-sans mt-auto">
+      <div className="border-b border-white/10 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm">
+          <span className="flex items-center gap-2 text-[#E2E8F0]">
+            <Shield className="w-4 h-4 text-[var(--brand-green)] shrink-0" />
+            Lotes con título inscrito en SUNARP
           </span>
-          <span className="text-[#a1a1aa] text-[10px] font-mono">
-            R.U.C. N° 20600000000 | INVIERTE EXPRESS S.A.C.
+          <span className="text-xs text-[#94A3B8]">
+            R.U.C. N° 20600000000 · Invierte Xpress S.A.C.
           </span>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-3">
-            <Link to="/" className="inline-flex group">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-14">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div className="space-y-4 md:col-span-1">
+            <Link to="/" className="inline-flex">
               <BrandLogo settings={settings} variant="footer" />
             </Link>
-            {(settings.footerDescription?.trim()) && (
-            <p className="text-xs text-stone-400 leading-relaxed font-light">
-              {settings.footerDescription}
-            </p>
+            {settings.footerDescription?.trim() && (
+              <p className="text-sm text-[#94A3B8] leading-relaxed max-w-xs">
+                {settings.footerDescription}
+              </p>
             )}
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-sans font-bold text-sm text-stone-200 uppercase tracking-widest">
-              Explorar
-            </h3>
-            <ul className="space-y-2.5 text-xs">
-              <li><Link to="/" className="hover:text-stone-100 transition-colors">Inicio Portal</Link></li>
-              <li><Link to="/catalog" className="hover:text-stone-100 transition-colors">Buscar Terrenos</Link></li>
-              <li><Link to="/about" className="hover:text-stone-100 transition-colors">Quiénes Somos</Link></li>
-              <li><Link to="/contact" className="hover:text-stone-100 transition-colors">Trabaja con un Experto</Link></li>
+            <h3 className="ie-footer-heading">Navegación</h3>
+            <ul className="space-y-2.5 text-sm text-[#94A3B8]">
+              <li><Link to="/" className="hover:text-[var(--brand-green)] transition-colors">Inicio</Link></li>
+              <li><Link to="/catalog" className="hover:text-[var(--brand-green)] transition-colors">Catálogo de lotes</Link></li>
+              <li><Link to="/about" className="hover:text-[var(--brand-green)] transition-colors">Quiénes somos</Link></li>
+              <li><Link to="/contact" className="hover:text-[var(--brand-green)] transition-colors">Contacto</Link></li>
             </ul>
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-sans font-bold text-sm text-stone-200 uppercase tracking-widest">
-              Lotes por Tipo
-            </h3>
-            <ul className="space-y-2.5 text-xs">
-              <li><Link to="/catalog?type=Playero" className="hover:text-[#fafafa] transition-colors flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />Proyectos Playeros</Link></li>
-              <li><Link to="/catalog?type=Campestre" className="hover:text-[#fafafa] transition-colors flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />Proyectos Campestres</Link></li>
-              <li><Link to="/catalog?type=Urbano" className="hover:text-[#fafafa] transition-colors flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />Habilitación Urbana</Link></li>
-              <li><Link to="/catalog?type=Industrial" className="hover:text-[#fafafa] transition-colors flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-[#a1a1aa]" />Zonas Industriales</Link></li>
+            <h3 className="ie-footer-heading">Tipos de lote</h3>
+            <ul className="space-y-2.5 text-sm text-[#94A3B8]">
+              <li><Link to="/catalog?type=Playero" className="hover:text-white transition-colors">Playeros</Link></li>
+              <li><Link to="/catalog?type=Campestre" className="hover:text-white transition-colors">Campestres</Link></li>
+              <li><Link to="/catalog?type=Urbano" className="hover:text-white transition-colors">Urbanos</Link></li>
+              <li><Link to="/catalog?type=Industrial" className="hover:text-white transition-colors">Industriales</Link></li>
             </ul>
           </div>
 
-          <div className="space-y-4 text-xs">
-            <h3 className="font-sans font-bold text-sm text-stone-200 uppercase tracking-widest">
-              Oficina Principal
-            </h3>
-            <ul className="space-y-3">
+          <div className="space-y-4">
+            <h3 className="ie-footer-heading">Contáctanos</h3>
+            <ul className="space-y-3 text-sm text-[#CBD5E0]">
               {activeChannels.length > 0 ? (
                 activeChannels.map((ch) => {
                   const Icon = channelIcon(ch.channelType);
                   const href = channelHref(ch);
                   return (
                     <li key={ch.id} className="flex items-start gap-2.5">
-                      <Icon className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                      <Icon className="w-4 h-4 text-[var(--brand-green)] shrink-0 mt-0.5" />
                       {href ? (
-                        <a href={href} className="hover:text-stone-100">
+                        <a href={href} className="hover:text-white transition-colors">
                           {ch.value}
-                          {ch.extraInfo ? ` (${ch.extraInfo})` : ""}
                         </a>
                       ) : (
                         <span>{ch.value}</span>
@@ -105,16 +98,14 @@ export const Footer: React.FC = () => {
               ) : (
                 <>
                   <li className="flex items-start gap-2.5">
-                    <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                    <span>Av. Javier Prado Este 488, San Isidro, Lima, Perú</span>
+                    <MapPin className="w-4 h-4 text-[var(--brand-green)] shrink-0 mt-0.5" />
+                    <span>Av. Javier Prado Este 488, San Isidro, Lima</span>
                   </li>
                   <li className="flex items-center gap-2.5">
-                    <Phone className="w-4 h-4 text-amber-500 shrink-0" />
-                    <a href="tel:+5116805120" className="hover:text-stone-100">(01) 680-5120</a>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Mail className="w-4 h-4 text-amber-500 shrink-0" />
-                    <a href="mailto:informes@invierteexpress.pe" className="hover:text-stone-100">informes@invierteexpress.pe</a>
+                    <Mail className="w-4 h-4 text-[var(--brand-green)] shrink-0" />
+                    <a href="mailto:informes@invierteexpress.pe" className="hover:text-white">
+                      informes@invierteexpress.pe
+                    </a>
                   </li>
                 </>
               )}
@@ -122,10 +113,9 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-stone-900 flex flex-col md:flex-row justify-between items-center gap-4 text-2xs md:text-xs">
-          <div className="text-stone-500 text-center md:text-left">
-            © {new Date().getFullYear()} {settings.siteName?.trim() || settings.browserTitle || "Invierte Express"}. Todos los derechos reservados.
-          </div>
+        <div className="mt-12 pt-8 border-t border-white/10 text-center md:text-left text-xs text-[#64748B]">
+          © {new Date().getFullYear()}{" "}
+          {settings.siteName?.trim() || "Invierte Xpress"}. Todos los derechos reservados.
         </div>
       </div>
     </footer>

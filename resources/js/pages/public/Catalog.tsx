@@ -123,27 +123,23 @@ export const Catalog: React.FC = () => {
   };
 
   return (
-    <div id="catalog-page" className="pt-24 min-h-screen bg-stone-50/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <section className="mb-8 space-y-2">
-          <span className="font-mono text-2xs text-amber-700 tracking-wider uppercase font-semibold">
-            Catálogo de proyectos
-          </span>
-          <h1 className="text-3xl font-sans font-extrabold text-emerald-950 tracking-tight">
-            Encuentra tu Próxima Inversión
-          </h1>
-          <p className="text-stone-500 text-xs md:text-sm font-light">
+    <div id="catalog-page" className="ie-page-shell">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section className="mb-10 space-y-3">
+          <span className="ie-eyebrow">Catálogo de proyectos</span>
+          <h1 className="ie-heading text-3xl sm:text-4xl">Encuentra tu próxima inversión</h1>
+          <p className="text-[var(--text-s)] text-sm max-w-2xl">
             Filtra por zona y región, compara precios y accede al detalle de cada proyecto con título SUNARP.
           </p>
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <aside className="lg:col-span-3 space-y-6">
-            <div className="bg-white rounded-xl border border-stone-200/60 p-5 premium-card-shadow space-y-5">
-              <div className="flex items-center justify-between border-b border-stone-100 pb-3">
-                <span className="font-sans font-extrabold text-xs uppercase text-emerald-950 tracking-wider flex items-center gap-1.5">
-                  <Filter className="w-4 h-4 text-amber-600" />
-                  Panel de Filtros
+            <div className="ie-filter-panel p-5 space-y-5">
+              <div className="flex items-center justify-between border-b border-[var(--border)] pb-3">
+                <span className="font-semibold text-sm text-[var(--text-p)] flex items-center gap-2">
+                  <Filter className="w-4 h-4 text-[var(--gold)]" />
+                  Filtros
                 </span>
                 <button
                   type="button"
@@ -165,7 +161,7 @@ export const Catalog: React.FC = () => {
                     placeholder="Palabras clave, ej. Chilca..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-stone-50 border border-stone-205 focus:border-emerald-700 focus:bg-white text-xs p-2.5 pl-9 rounded-lg outline-none transition-colors"
+                    className="w-full bg-[var(--bg-subtle)] border border-[var(--border)] focus:border-[var(--accent)] focus:bg-white text-sm p-2.5 pl-9 rounded-xl outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -177,7 +173,7 @@ export const Catalog: React.FC = () => {
                 <select
                   value={selectedType}
                   onChange={(e) => setSelectedType(e.target.value)}
-                  className="w-full bg-stone-50 border border-stone-200 focus:border-emerald-700 focus:bg-white text-xs p-2.5 rounded-lg outline-none cursor-pointer"
+                  className="w-full bg-[var(--bg-subtle)] border border-[var(--border)] focus:border-[var(--accent)] focus:bg-white text-sm p-2.5 rounded-xl outline-none cursor-pointer"
                 >
                   <option value="All">Cualquiera (Todos)</option>
                   {uniqueProjectTypes.map((type) => (
@@ -195,7 +191,7 @@ export const Catalog: React.FC = () => {
                 <select
                   value={selectedRegion}
                   onChange={(e) => setSelectedRegion(e.target.value)}
-                  className="w-full bg-stone-50 border border-stone-200 focus:border-emerald-700 focus:bg-white text-xs p-2.5 rounded-lg outline-none cursor-pointer"
+                  className="w-full bg-[var(--bg-subtle)] border border-[var(--border)] focus:border-[var(--accent)] focus:bg-white text-sm p-2.5 rounded-xl outline-none cursor-pointer"
                 >
                   <option value="All">Todo el territorio nacional</option>
                   {uniqueRegions.length === 0 ? (
@@ -215,9 +211,9 @@ export const Catalog: React.FC = () => {
           </aside>
 
           <main className="lg:col-span-9 space-y-4">
-            <div className="flex items-center justify-between bg-white px-4 py-3 border border-stone-200/60 rounded-xl premium-card-shadow">
-              <span className="font-mono text-[11px] text-stone-500">
-                Proyectos: <strong className="text-emerald-950">{filteredProjects.length}</strong>
+            <div className="flex items-center justify-between ie-card px-4 py-3">
+              <span className="text-sm text-[var(--text-muted)]">
+                Proyectos: <strong className="text-[var(--accent)]">{filteredProjects.length}</strong>
               </span>
 
               <div className="flex items-center gap-3">

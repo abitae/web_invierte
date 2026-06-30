@@ -6,14 +6,14 @@
 import type { AboutData, ContactFormConfig, GuaranteesData, HomeAlertModal, SiteSettings } from "../types";
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  logoUrl: null,
-  faviconUrl: null,
-  siteName: "Invierte Express",
-  siteTagline: "Tu inversión en lotes, al instante",
-  browserTitle: "Invierte Express | Lotes con respaldo registral",
-  footerTagline: "Tu inversión en lotes, al instante",
+  logoUrl: "/images/logo-invierte-xpress.png",
+  faviconUrl: "/images/logo-invierte-xpress.png",
+  siteName: "",
+  siteTagline: "",
+  browserTitle: "Invierte Xpress | Lotes con respaldo registral",
+  footerTagline: "Invierte Rápido, Asegura Tu futuro",
   footerDescription:
-    "Invierte Express — lotes con respaldo registral y financiamiento directo en todo el Perú. Conectamos familias e inversionistas con terrenos de alta plusvalía.",
+    "Invierte Xpress — lotes con respaldo registral y financiamiento directo en todo el Perú. Conectamos familias e inversionistas con terrenos de alta plusvalía.",
 };
 
 export const DEFAULT_GUARANTEES: GuaranteesData = {
@@ -84,7 +84,7 @@ export const DEFAULT_ABOUT: AboutData = {
     heroEyebrow: "Nuestra Filosofía",
     heroHeading: "Invierte en lotes con confianza y respaldo registral",
     heroDescription:
-      "En Invierte Express facilitamos la compra de lotes playeros, campestres y urbanos con título de propiedad inscrito en SUNARP, asesoría personalizada y planes de financiamiento directo.",
+      "En Invierte Xpress facilitamos la compra de lotes playeros, campestres y urbanos con título de propiedad inscrito en SUNARP, asesoría personalizada y planes de financiamiento directo.",
     heroBackgroundImageUrl:
       "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1600",
     missionHeading: "Nuestra Misión",

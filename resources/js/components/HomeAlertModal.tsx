@@ -116,7 +116,7 @@ export const HomeAlertModal: React.FC = () => {
                   href={buttonHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center bg-[var(--accent)] hover:bg-[#008c4a] text-white font-sans font-semibold text-xs px-5 py-2.5 rounded-lg transition-colors"
+                  className="ie-btn-primary text-xs px-5 py-2.5"
                 >
                   {alert.buttonText}
                 </a>
@@ -124,7 +124,7 @@ export const HomeAlertModal: React.FC = () => {
                 <Link
                   to={buttonHref.startsWith("/") ? buttonHref : `/${buttonHref}`}
                   onClick={dismiss}
-                  className="inline-flex items-center justify-center bg-[var(--accent)] hover:bg-[#008c4a] text-white font-sans font-semibold text-xs px-5 py-2.5 rounded-lg transition-colors"
+                  className="ie-btn-primary text-xs px-5 py-2.5"
                 >
                   {alert.buttonText}
                 </Link>
