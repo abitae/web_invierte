@@ -20,6 +20,7 @@ import {
   Megaphone,
   UserCheck
 } from "lucide-react";
+import { ImageUploadField } from "../../components/admin/ImageUploadField";
 import { SiteIdentityTab } from "./SiteIdentityTab";
 import { GuaranteesTab } from "./GuaranteesTab";
 
@@ -462,7 +463,7 @@ export const MultimediaManagement: React.FC = () => {
       {/* MODAL 1: CREATE BANNER FORM */}
       {isBannerModalOpen && (
         <section className="fixed inset-0 admin-overlay backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl w-full max-w-md p-6 relative space-y-5 text-[var(--text-p)]">
+          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl w-full max-w-md p-6 relative space-y-5 text-[var(--text-p)] max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setIsBannerModalOpen(false)}
               className="absolute top-4 right-4 p-1.5 hover:bg-[var(--bg)] rounded-lg text-[var(--text-s)] transition-colors cursor-pointer"
@@ -533,19 +534,14 @@ export const MultimediaManagement: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <label className="block text-3xs font-mono font-bold uppercase tracking-wide text-[var(--text-s)]">
-                  Enlace Imagen de Fondo (Unsplash recomendado)
-                </label>
-                <input
-                  type="url"
-                  required
-                  placeholder="https://images.unsplash.com..."
-                  value={bannerUrl}
-                  onChange={(e) => setBannerUrl(e.target.value)}
-                  className="w-full admin-card border text-[var(--text-p)] p-2.5 rounded-lg outline-none text-[var(--text-p)]"
-                />
-              </div>
+              <ImageUploadField
+                label="Imagen de fondo"
+                value={bannerUrl}
+                onChange={setBannerUrl}
+                required
+                placeholder="URL o subir archivo al servidor"
+                previewAlt="Vista previa de la portada"
+              />
 
               <div className="flex items-center gap-2 pt-2.5">
                 <input
@@ -583,7 +579,7 @@ export const MultimediaManagement: React.FC = () => {
       {/* MODAL 2: CREATE TESTIMONIAL FORM */}
       {isTestimonialModalOpen && (
         <section className="fixed inset-0 admin-overlay backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl w-full max-w-md p-6 relative space-y-5 text-[var(--text-p)]">
+          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl w-full max-w-md p-6 relative space-y-5 text-[var(--text-p)] max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setIsTestimonialModalOpen(false)}
               className="absolute top-4 right-4 p-1.5 hover:bg-[var(--bg)] rounded-lg text-[var(--text-s)] transition-colors cursor-pointer"
@@ -658,18 +654,15 @@ export const MultimediaManagement: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <label className="block text-3xs font-mono font-bold uppercase tracking-wide text-[var(--text-s)]">
-                  Enlace Foto de Perfil (Avatar)
-                </label>
-                <input
-                  type="url"
-                  placeholder="https://images.unsplash..."
-                  value={testAvatar}
-                  onChange={(e) => setTestAvatar(e.target.value)}
-                  className="w-full admin-card border text-[var(--text-p)] p-2.5 rounded-lg text-[var(--text-p)]"
-                />
-              </div>
+              <ImageUploadField
+                label="Foto de perfil (avatar)"
+                value={testAvatar}
+                onChange={setTestAvatar}
+                placeholder="URL o subir archivo al servidor"
+                uploadLabel="Subir foto"
+                previewAlt="Vista previa del avatar"
+                previewClassName="h-16 w-16 rounded-full object-cover border border-[var(--border)]"
+              />
 
               <div className="space-y-1">
                 <label className="block text-3xs font-mono font-bold uppercase tracking-wide text-[var(--text-s)]">

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 import { uploadFile } from "../../api/upload";
 import { DEFAULT_HOME_ALERT } from "../../config/siteDefaults";
+import { ImageUploadField } from "../../components/admin/ImageUploadField";
 import { Save, Upload, ExternalLink, Megaphone } from "lucide-react";
 
 export const HomeAlertManagement: React.FC = () => {
@@ -33,11 +34,10 @@ export const HomeAlertManagement: React.FC = () => {
     setButtonLink(data.buttonLink ?? "");
   }, [data]);
 
-  const handleUpload = async (file: File, target: "image" | "video") => {
+  const handleUpload = async (file: File) => {
     try {
       const url = await uploadFile(file);
-      if (target === "video") setVideoUrl(url);
-      else setImageUrl(url);
+      setVideoUrl(url);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Error al subir archivo";
       alert(msg);
@@ -127,27 +127,15 @@ export const HomeAlertManagement: React.FC = () => {
           />
         </div>
 
-        <div className="space-y-3 p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
-          <label className="text-[10px] font-mono uppercase text-[var(--text-p)] font-bold">Imagen del aviso</label>
-          <input
+        <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
+          <ImageUploadField
+            label="Imagen del aviso"
             value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            className="w-full text-xs p-2.5 rounded border border-[var(--border)] bg-[var(--card-bg)]"
+            onChange={setImageUrl}
             placeholder="URL o subir al servidor"
+            previewAlt="Vista previa imagen"
+            previewClassName="max-h-40 w-full object-cover rounded-lg border border-[var(--border)]"
           />
-          <label className="inline-flex items-center gap-1.5 text-[10px] cursor-pointer text-[var(--accent)] font-semibold">
-            <Upload className="w-3.5 h-3.5" />
-            Subir imagen
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0], "image")}
-            />
-          </label>
-          {imageUrl && (
-            <img src={imageUrl} alt="Vista previa imagen" className="max-h-40 w-full object-cover rounded-lg border border-[var(--border)]" />
-          )}
         </div>
 
         <div className="space-y-3 p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
@@ -168,7 +156,7 @@ export const HomeAlertManagement: React.FC = () => {
               type="file"
               accept="video/mp4,video/webm,video/quicktime,video/x-msvideo,.mp4,.webm,.mov"
               className="hidden"
-              onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0], "video")}
+              onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0])}
             />
           </label>
           {videoUrl && (

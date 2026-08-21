@@ -6,10 +6,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
-import { uploadFile } from "../../api/upload";
 import { DEFAULT_ABOUT } from "../../config/siteDefaults";
 import { GuaranteeIcon } from "../../utils/siteContent";
-import { Plus, Save, Trash2, Upload, Users, ExternalLink } from "lucide-react";
+import { ImageUploadField } from "../../components/admin/ImageUploadField";
+import { Plus, Save, Trash2, Users, ExternalLink } from "lucide-react";
 
 const VALUE_ICON_OPTIONS = ["Award", "ShieldAlert", "HeartHandshake", "ShieldCheck", "Landmark", "Eye"];
 
@@ -116,25 +116,6 @@ export const AboutManagement: React.FC = () => {
     }
   };
 
-  const handleHeroBgUpload = async (file: File) => {
-    try {
-      const url = await uploadFile(file);
-      setHeroBackgroundImageUrl(url);
-    } catch {
-      alert("No se pudo subir la imagen de fondo.");
-    }
-  };
-
-  const handleAdvisorUpload = async (file: File, target: "new" | "edit") => {
-    try {
-      const url = await uploadFile(file);
-      if (target === "new") setAdvisorImageUrl(url);
-      else setEditAdvisorImageUrl(url);
-    } catch {
-      alert("No se pudo subir la imagen al servidor.");
-    }
-  };
-
   const handleCreateAdvisor = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!advisorName || !advisorRole || !advisorBio || !advisorImageUrl) return;
@@ -223,24 +204,16 @@ export const AboutManagement: React.FC = () => {
           <input value={heroHeading} onChange={(e) => setHeroHeading(e.target.value)} placeholder="Título principal" className="text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" />
           <textarea value={heroDescription} onChange={(e) => setHeroDescription(e.target.value)} placeholder="Descripción" rows={3} className="md:col-span-2 text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" />
         </div>
-        <div className="space-y-2 p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
-          <label className="text-[10px] font-mono uppercase text-[var(--text-p)] font-bold">Imagen de fondo del hero</label>
-          <input
+        <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
+          <ImageUploadField
+            label="Imagen de fondo del hero"
             value={heroBackgroundImageUrl}
-            onChange={(e) => setHeroBackgroundImageUrl(e.target.value)}
+            onChange={setHeroBackgroundImageUrl}
             placeholder="URL o subir archivo al servidor"
-            className="w-full text-xs p-2 rounded border border-[var(--border)] bg-[var(--card-bg)]"
+            uploadLabel="Subir imagen de fondo"
+            previewAlt="Vista previa fondo"
+            previewClassName="h-32 w-full object-cover rounded-lg border border-[var(--border)]"
           />
-          <label className="inline-flex items-center gap-1.5 text-[10px] cursor-pointer text-[var(--accent)] font-semibold">
-            <Upload className="w-3.5 h-3.5" />
-            Subir imagen de fondo
-            <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleHeroBgUpload(e.target.files[0])} />
-          </label>
-          {heroBackgroundImageUrl && (
-            <div className="relative h-32 rounded-lg overflow-hidden border border-[var(--border)]">
-              <img src={heroBackgroundImageUrl} alt="Vista previa fondo" className="w-full h-full object-cover" />
-            </div>
-          )}
         </div>
       </div>
 
@@ -368,13 +341,15 @@ export const AboutManagement: React.FC = () => {
             <input value={editAdvisorName} onChange={(e) => setEditAdvisorName(e.target.value)} placeholder="Nombre" className="w-full text-xs p-2 rounded border border-[var(--border)] bg-[var(--card-bg)]" />
             <input value={editAdvisorRole} onChange={(e) => setEditAdvisorRole(e.target.value)} placeholder="Cargo" className="w-full text-xs p-2 rounded border border-[var(--border)] bg-[var(--card-bg)]" />
             <textarea value={editAdvisorBio} onChange={(e) => setEditAdvisorBio(e.target.value)} placeholder="Biografía" rows={3} className="w-full text-xs p-2 rounded border border-[var(--border)] bg-[var(--card-bg)]" />
-            <input value={editAdvisorImageUrl} onChange={(e) => setEditAdvisorImageUrl(e.target.value)} placeholder="URL de imagen" className="w-full text-xs p-2 rounded border border-[var(--border)] bg-[var(--card-bg)]" />
-            <label className="inline-flex items-center gap-1.5 text-[10px] cursor-pointer text-[var(--accent)] font-semibold">
-              <Upload className="w-3.5 h-3.5" />
-              Subir foto al servidor
-              <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleAdvisorUpload(e.target.files[0], "edit")} />
-            </label>
-            {editAdvisorImageUrl && <img src={editAdvisorImageUrl} alt="" className="h-20 w-auto object-cover rounded" />}
+            <ImageUploadField
+              label="Foto del asesor"
+              value={editAdvisorImageUrl}
+              onChange={setEditAdvisorImageUrl}
+              placeholder="URL o subir archivo al servidor"
+              uploadLabel="Subir foto al servidor"
+              previewAlt="Vista previa del asesor"
+              previewClassName="h-20 w-auto object-cover rounded"
+            />
             <div className="flex gap-2">
               <button type="button" onClick={saveEditAdvisor} className="text-[10px] font-bold px-3 py-1.5 rounded bg-[var(--accent)] text-white uppercase">
                 Guardar cambios
@@ -391,13 +366,16 @@ export const AboutManagement: React.FC = () => {
           <input value={advisorName} onChange={(e) => setAdvisorName(e.target.value)} placeholder="Nombre completo" className="w-full text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" required />
           <input value={advisorRole} onChange={(e) => setAdvisorRole(e.target.value)} placeholder="Cargo / rol" className="w-full text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" required />
           <textarea value={advisorBio} onChange={(e) => setAdvisorBio(e.target.value)} placeholder="Biografía" rows={3} className="w-full text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" required />
-          <input value={advisorImageUrl} onChange={(e) => setAdvisorImageUrl(e.target.value)} placeholder="URL de imagen (o subir archivo)" className="w-full text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" required />
-          <label className="inline-flex items-center gap-1.5 text-[10px] cursor-pointer text-[var(--accent)] font-semibold">
-            <Upload className="w-3.5 h-3.5" />
-            Subir foto al servidor
-            <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleAdvisorUpload(e.target.files[0], "new")} />
-          </label>
-          {advisorImageUrl && <img src={advisorImageUrl} alt="" className="h-24 w-auto object-cover rounded" />}
+          <ImageUploadField
+            label="Foto del asesor"
+            value={advisorImageUrl}
+            onChange={setAdvisorImageUrl}
+            required
+            placeholder="URL o subir archivo al servidor"
+            uploadLabel="Subir foto al servidor"
+            previewAlt="Vista previa del asesor"
+            previewClassName="h-24 w-auto object-cover rounded"
+          />
           <button type="submit" className="inline-flex items-center gap-1 bg-amber-500 text-stone-950 text-[10px] font-bold px-3 py-1.5 rounded uppercase">
             <Plus className="w-3.5 h-3.5" /> Añadir asesor al carrusel
           </button>

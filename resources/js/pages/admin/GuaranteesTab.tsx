@@ -6,6 +6,7 @@
 import React, { useState } from "react";
 import { useApp } from "../../context/AppContext";
 import { DEFAULT_GUARANTEES } from "../../config/siteDefaults";
+import { ImageUploadField } from "../../components/admin/ImageUploadField";
 import { Plus, Save, Trash2 } from "lucide-react";
 
 const ICON_OPTIONS = ["ShieldCheck", "TrendingUp", "Gem", "CheckCircle", "Award", "Star"];
@@ -64,7 +65,16 @@ export const GuaranteesTab: React.FC = () => {
           <input value={eyebrow} onChange={(e) => setEyebrow(e.target.value)} placeholder="Etiqueta" className="text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" />
           <input value={heading} onChange={(e) => setHeading(e.target.value)} placeholder="Título" className="text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" />
           <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Descripción" rows={2} className="md:col-span-2 text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" />
-          <input value={backgroundImageUrl} onChange={(e) => setBackgroundImageUrl(e.target.value)} placeholder="URL imagen de fondo" className="md:col-span-2 text-xs p-2 rounded border border-[var(--border)] bg-[var(--bg)]" />
+          <div className="md:col-span-2">
+            <ImageUploadField
+              label="Imagen de fondo"
+              value={backgroundImageUrl}
+              onChange={setBackgroundImageUrl}
+              placeholder="URL o subir archivo al servidor"
+              previewAlt="Vista previa del fondo de garantías"
+              previewClassName="max-h-32 w-full object-cover rounded-lg border border-[var(--border)]"
+            />
+          </div>
         </div>
         <button type="button" onClick={saveSection} className="inline-flex items-center gap-1 bg-[var(--accent)] text-white text-xs font-bold px-3 py-1.5 rounded uppercase">
           <Save className="w-3.5 h-3.5" /> Guardar sección

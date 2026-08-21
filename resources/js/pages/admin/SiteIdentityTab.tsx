@@ -5,11 +5,11 @@
 
 import React, { useState } from "react";
 import { useApp } from "../../context/AppContext";
-import { uploadFile } from "../../api/upload";
 import { DEFAULT_SITE_SETTINGS } from "../../config/siteDefaults";
 import { BrandLogo } from "../../components/BrandLogo";
+import { ImageUploadField } from "../../components/admin/ImageUploadField";
 import type { SiteSettings } from "../../types";
-import { Save, Upload, Eye } from "lucide-react";
+import { Save, Eye } from "lucide-react";
 
 export const SiteIdentityTab: React.FC = () => {
   const { siteSettings, updateSiteSettings } = useApp();
@@ -42,16 +42,6 @@ export const SiteIdentityTab: React.FC = () => {
     browserTitle: browserTitle.trim() || DEFAULT_SITE_SETTINGS.browserTitle,
     footerTagline: footerTagline.trim(),
     footerDescription: footerDescription.trim(),
-  };
-
-  const handleUpload = async (file: File, target: "logo" | "favicon") => {
-    try {
-      const url = await uploadFile(file);
-      if (target === "logo") setLogoUrl(url);
-      else setFaviconUrl(url);
-    } catch {
-      alert("No se pudo subir la imagen.");
-    }
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -95,40 +85,28 @@ export const SiteIdentityTab: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="space-y-3 p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
-          <label className="text-[10px] font-mono uppercase text-[var(--text-p)] font-bold">Logo principal</label>
-          <input
+        <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
+          <ImageUploadField
+            label="Logo principal"
             value={logoUrl}
-            onChange={(e) => setLogoUrl(e.target.value)}
-            className="w-full text-xs p-2.5 rounded border border-[var(--border)] bg-[var(--card-bg)] text-[var(--text-p)]"
-            placeholder="URL o subir archivo..."
+            onChange={setLogoUrl}
+            placeholder="URL o subir archivo al servidor"
+            uploadLabel="Subir logo"
+            previewAlt="Vista previa logo"
+            previewClassName="h-12 w-auto max-w-full object-contain"
           />
-          <label className="inline-flex items-center gap-1.5 text-[10px] cursor-pointer text-[var(--accent-text)] font-semibold">
-            <Upload className="w-3.5 h-3.5" />
-            Subir logo
-            <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0], "logo")} />
-          </label>
-          {logoUrl && (
-            <div className="pt-2 border-t border-[var(--border)]">
-              <img src={logoUrl} alt="Vista previa logo" className="h-12 w-auto max-w-full object-contain" />
-            </div>
-          )}
         </div>
 
-        <div className="space-y-3 p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
-          <label className="text-[10px] font-mono uppercase text-[var(--text-p)] font-bold">Favicon</label>
-          <input
+        <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
+          <ImageUploadField
+            label="Favicon"
             value={faviconUrl}
-            onChange={(e) => setFaviconUrl(e.target.value)}
-            className="w-full text-xs p-2.5 rounded border border-[var(--border)] bg-[var(--card-bg)] text-[var(--text-p)]"
-            placeholder="URL o subir archivo..."
+            onChange={setFaviconUrl}
+            placeholder="URL o subir archivo al servidor"
+            uploadLabel="Subir favicon"
+            previewAlt="Vista previa favicon"
+            previewClassName="h-8 w-8 object-contain"
           />
-          <label className="inline-flex items-center gap-1.5 text-[10px] cursor-pointer text-[var(--accent-text)] font-semibold">
-            <Upload className="w-3.5 h-3.5" />
-            Subir favicon
-            <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0], "favicon")} />
-          </label>
-          {faviconUrl && <img src={faviconUrl} alt="Vista previa favicon" className="h-8 w-8 object-contain" />}
         </div>
       </div>
 
