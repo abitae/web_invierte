@@ -209,7 +209,6 @@ export const AboutManagement: React.FC = () => {
             label="Imagen de fondo del hero"
             value={heroBackgroundImageUrl}
             onChange={setHeroBackgroundImageUrl}
-            placeholder="URL o subir archivo al servidor"
             uploadLabel="Subir imagen de fondo"
             previewAlt="Vista previa fondo"
             previewClassName="h-32 w-full object-cover rounded-lg border border-[var(--border)]"
@@ -345,7 +344,6 @@ export const AboutManagement: React.FC = () => {
               label="Foto del asesor"
               value={editAdvisorImageUrl}
               onChange={setEditAdvisorImageUrl}
-              placeholder="URL o subir archivo al servidor"
               uploadLabel="Subir foto al servidor"
               previewAlt="Vista previa del asesor"
               previewClassName="h-20 w-auto object-cover rounded"
@@ -371,7 +369,6 @@ export const AboutManagement: React.FC = () => {
             value={advisorImageUrl}
             onChange={setAdvisorImageUrl}
             required
-            placeholder="URL o subir archivo al servidor"
             uploadLabel="Subir foto al servidor"
             previewAlt="Vista previa del asesor"
             previewClassName="h-24 w-auto object-cover rounded"

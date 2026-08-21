@@ -6,10 +6,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
-import { uploadFile } from "../../api/upload";
 import { DEFAULT_HOME_ALERT } from "../../config/siteDefaults";
 import { ImageUploadField } from "../../components/admin/ImageUploadField";
-import { Save, Upload, ExternalLink, Megaphone } from "lucide-react";
+import { Save, ExternalLink, Megaphone } from "lucide-react";
 
 export const HomeAlertManagement: React.FC = () => {
   const { homeAlert, updateHomeAlert } = useApp();
@@ -33,16 +32,6 @@ export const HomeAlertManagement: React.FC = () => {
     setButtonText(data.buttonText ?? "");
     setButtonLink(data.buttonLink ?? "");
   }, [data]);
-
-  const handleUpload = async (file: File) => {
-    try {
-      const url = await uploadFile(file);
-      setVideoUrl(url);
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : "Error al subir archivo";
-      alert(msg);
-    }
-  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,41 +121,22 @@ export const HomeAlertManagement: React.FC = () => {
             label="Imagen del aviso"
             value={imageUrl}
             onChange={setImageUrl}
-            placeholder="URL o subir al servidor"
             previewAlt="Vista previa imagen"
             previewClassName="max-h-40 w-full object-cover rounded-lg border border-[var(--border)]"
           />
         </div>
 
-        <div className="space-y-3 p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50">
-          <label className="text-[10px] font-mono uppercase text-[var(--text-p)] font-bold">Video del aviso</label>
+        <div className="p-4 rounded-lg border border-[var(--border)] bg-[var(--bg)]/50 space-y-2">
           <p className="text-[10px] text-[var(--text-s)] font-mono">
-            MP4, WebM u otros formatos de video (máx. 50 MB). Si hay video, tiene prioridad sobre la imagen en el modal.
+            Si hay video, tiene prioridad sobre la imagen en el modal.
           </p>
-          <input
+          <ImageUploadField
+            label="Video del aviso"
+            kind="video"
             value={videoUrl}
-            onChange={(e) => setVideoUrl(e.target.value)}
-            className="w-full text-xs p-2.5 rounded border border-[var(--border)] bg-[var(--card-bg)]"
-            placeholder="URL o subir al servidor"
+            onChange={setVideoUrl}
+            previewClassName="max-h-48 w-full rounded-lg border border-[var(--border)] bg-black"
           />
-          <label className="inline-flex items-center gap-1.5 text-[10px] cursor-pointer text-[var(--accent)] font-semibold">
-            <Upload className="w-3.5 h-3.5" />
-            Subir video
-            <input
-              type="file"
-              accept="video/mp4,video/webm,video/quicktime,video/x-msvideo,.mp4,.webm,.mov"
-              className="hidden"
-              onChange={(e) => e.target.files?.[0] && handleUpload(e.target.files[0])}
-            />
-          </label>
-          {videoUrl && (
-            <video
-              src={videoUrl}
-              controls
-              playsInline
-              className="max-h-48 w-full rounded-lg border border-[var(--border)] bg-black"
-            />
-          )}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

@@ -90,7 +90,6 @@ export const SiteIdentityTab: React.FC = () => {
             label="Logo principal"
             value={logoUrl}
             onChange={setLogoUrl}
-            placeholder="URL o subir archivo al servidor"
             uploadLabel="Subir logo"
             previewAlt="Vista previa logo"
             previewClassName="h-12 w-auto max-w-full object-contain"
@@ -102,7 +101,6 @@ export const SiteIdentityTab: React.FC = () => {
             label="Favicon"
             value={faviconUrl}
             onChange={setFaviconUrl}
-            placeholder="URL o subir archivo al servidor"
             uploadLabel="Subir favicon"
             previewAlt="Vista previa favicon"
             previewClassName="h-8 w-8 object-contain"

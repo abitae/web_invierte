@@ -539,7 +539,6 @@ export const MultimediaManagement: React.FC = () => {
                 value={bannerUrl}
                 onChange={setBannerUrl}
                 required
-                placeholder="URL o subir archivo al servidor"
                 previewAlt="Vista previa de la portada"
               />
 
@@ -658,7 +657,6 @@ export const MultimediaManagement: React.FC = () => {
                 label="Foto de perfil (avatar)"
                 value={testAvatar}
                 onChange={setTestAvatar}
-                placeholder="URL o subir archivo al servidor"
                 uploadLabel="Subir foto"
                 previewAlt="Vista previa del avatar"
                 previewClassName="h-16 w-16 rounded-full object-cover border border-[var(--border)]"

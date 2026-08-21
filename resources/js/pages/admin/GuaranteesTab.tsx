@@ -70,7 +70,6 @@ export const GuaranteesTab: React.FC = () => {
               label="Imagen de fondo"
               value={backgroundImageUrl}
               onChange={setBackgroundImageUrl}
-              placeholder="URL o subir archivo al servidor"
               previewAlt="Vista previa del fondo de garantías"
               previewClassName="max-h-32 w-full object-cover rounded-lg border border-[var(--border)]"
             />
