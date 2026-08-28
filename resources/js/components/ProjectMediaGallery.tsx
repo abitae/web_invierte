@@ -4,8 +4,10 @@
  */
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import type { Project } from "../types";
+import { EASE_OUT } from "../utils/motion";
 
 export interface GalleryItem {
   url: string;
@@ -132,12 +134,19 @@ export const ProjectMediaGallery: React.FC<ProjectMediaGalleryProps> = ({ projec
             className="relative w-full sm:flex-1 h-[280px] sm:h-[400px] rounded-lg overflow-hidden bg-[var(--bg)] border border-[var(--border)]/40 group order-1 sm:order-2 cursor-zoom-in focus:outline-none focus-visible:ring-1 focus-visible:ring-[var(--accent)]/40"
             aria-label="Ampliar imagen"
           >
-            <img
-              src={activeItem.url}
-              alt={activeItem.title}
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.015]"
-              referrerPolicy="no-referrer"
-            />
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeItem.url}
+                src={activeItem.url}
+                alt={activeItem.title}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.015]"
+                referrerPolicy="no-referrer"
+              />
+            </AnimatePresence>
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
             <span className="absolute bottom-2.5 right-2.5 p-1.5 rounded-md bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity">
               <ZoomIn className="w-3.5 h-3.5" />
@@ -146,8 +155,13 @@ export const ProjectMediaGallery: React.FC<ProjectMediaGalleryProps> = ({ projec
         </div>
       </div>
 
+      <AnimatePresence>
       {modalOpen && (
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
           role="dialog"
           aria-modal="true"
@@ -160,7 +174,12 @@ export const ProjectMediaGallery: React.FC<ProjectMediaGalleryProps> = ({ projec
             aria-label="Cerrar"
           />
 
-          <div className="relative z-10 w-full max-w-5xl flex flex-col max-h-[92vh]">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ duration: 0.25, ease: EASE_OUT }}
+            className="relative z-10 w-full max-w-5xl flex flex-col max-h-[92vh]">
             <button
               type="button"
               onClick={closeModal}
@@ -182,12 +201,19 @@ export const ProjectMediaGallery: React.FC<ProjectMediaGalleryProps> = ({ projec
                 </button>
               )}
 
-              <img
-                src={modalItem.url}
-                alt={modalItem.title}
-                className="absolute inset-0 w-full h-full object-contain p-3 sm:p-5"
-                referrerPolicy="no-referrer"
-              />
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={modalItem.url}
+                  src={modalItem.url}
+                  alt={modalItem.title}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute inset-0 w-full h-full object-contain p-3 sm:p-5"
+                  referrerPolicy="no-referrer"
+                />
+              </AnimatePresence>
 
               {hasMultiple && (
                 <button
@@ -222,9 +248,10 @@ export const ProjectMediaGallery: React.FC<ProjectMediaGalleryProps> = ({ projec
                 ))}
               </div>
             )}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </>
   );
 };

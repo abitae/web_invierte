@@ -5,6 +5,7 @@
 
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { MotionConfig } from "motion/react";
 import { AppProvider, useApp } from "./context/AppContext";
 
 // Public Pages
@@ -129,121 +130,123 @@ const ProtectedAdmin: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
 export default function App() {
   return (
-    <AppProvider>
-      <BrowserRouter>
-        <SiteHead />
-        <ScrollToTop />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <PublicLayout>
-                <Home />
-              </PublicLayout>
-            }
-          />
-          <Route
-            path="/catalog"
-            element={
-              <PublicLayout>
-                <Catalog />
-              </PublicLayout>
-            }
-          />
-          <Route
-            path="/catalog/:id"
-            element={
-              <PublicLayout>
-                <ProjectDetail />
-              </PublicLayout>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <PublicLayout>
-                <Nosotros />
-              </PublicLayout>
-            }
-          />
-          <Route
-            path="/contact"
-            element={
-              <PublicLayout>
-                <Contacto />
-              </PublicLayout>
-            }
-          />
-
-          <Route path="/admin/login" element={<AdminLogin />} />
-
-          <Route
-            path="/admin"
-            element={
-              <ProtectedAdmin>
-                <DashboardOverview />
-              </ProtectedAdmin>
-            }
-          />
-          <Route
-            path="/admin/multimedia"
-            element={
-              <ProtectedAdmin>
-                <MultimediaManagement />
-              </ProtectedAdmin>
-            }
-          />
-          <Route
-            path="/admin/forms"
-            element={
-              <ProtectedAdmin>
-                <ContactFormsManagement />
-              </ProtectedAdmin>
-            }
-          />
-          <Route
-            path="/admin/channels"
-            element={
-              <ProtectedAdmin>
-                <CorporateChannelsManagement />
-              </ProtectedAdmin>
-            }
-          />
-          <Route
-            path="/admin/faq"
-            element={
-              <ProtectedAdmin>
-                <FaqManagement />
-              </ProtectedAdmin>
-            }
-          />
-          <Route
-            path="/admin/about"
-            element={
-              <ProtectedAdmin>
-                <AboutManagement />
-              </ProtectedAdmin>
-            }
-          />
-          <Route
-            path="/admin/home-alert"
-            element={
-              <ProtectedAdmin>
-                <HomeAlertManagement />
-              </ProtectedAdmin>
-            }
-          />
-
-          <Route
-            path="*"
-            element={
-              <PublicLayout>
-                <Home />
-              </PublicLayout>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </AppProvider>
+    <MotionConfig reducedMotion="user">
+      <AppProvider>
+        <BrowserRouter>
+          <SiteHead />
+          <ScrollToTop />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicLayout>
+                  <Home />
+                </PublicLayout>
+              }
+            />
+            <Route
+              path="/catalog"
+              element={
+                <PublicLayout>
+                  <Catalog />
+                </PublicLayout>
+              }
+            />
+            <Route
+              path="/catalog/:id"
+              element={
+                <PublicLayout>
+                  <ProjectDetail />
+                </PublicLayout>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <PublicLayout>
+                  <Nosotros />
+                </PublicLayout>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <PublicLayout>
+                  <Contacto />
+                </PublicLayout>
+              }
+            />
+  
+            <Route path="/admin/login" element={<AdminLogin />} />
+  
+            <Route
+              path="/admin"
+              element={
+                <ProtectedAdmin>
+                  <DashboardOverview />
+                </ProtectedAdmin>
+              }
+            />
+            <Route
+              path="/admin/multimedia"
+              element={
+                <ProtectedAdmin>
+                  <MultimediaManagement />
+                </ProtectedAdmin>
+              }
+            />
+            <Route
+              path="/admin/forms"
+              element={
+                <ProtectedAdmin>
+                  <ContactFormsManagement />
+                </ProtectedAdmin>
+              }
+            />
+            <Route
+              path="/admin/channels"
+              element={
+                <ProtectedAdmin>
+                  <CorporateChannelsManagement />
+                </ProtectedAdmin>
+              }
+            />
+            <Route
+              path="/admin/faq"
+              element={
+                <ProtectedAdmin>
+                  <FaqManagement />
+                </ProtectedAdmin>
+              }
+            />
+            <Route
+              path="/admin/about"
+              element={
+                <ProtectedAdmin>
+                  <AboutManagement />
+                </ProtectedAdmin>
+              }
+            />
+            <Route
+              path="/admin/home-alert"
+              element={
+                <ProtectedAdmin>
+                  <HomeAlertManagement />
+                </ProtectedAdmin>
+              }
+            />
+  
+            <Route
+              path="*"
+              element={
+                <PublicLayout>
+                  <Home />
+                </PublicLayout>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </AppProvider>
+    </MotionConfig>
   );
 }

@@ -5,6 +5,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowLeft,
   MapPin,
@@ -125,7 +126,13 @@ export const ProjectDetail: React.FC = () => {
   }
 
   return (
-    <div id="project-detail-page" className="ie-page-shell">
+    <motion.div
+      id="project-detail-page"
+      className="ie-page-shell"
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Columna principal */}
@@ -251,16 +258,32 @@ export const ProjectDetail: React.FC = () => {
                   <p className="text-[11px] text-[var(--text-s)] leading-relaxed">{interestLabel}</p>
                 </div>
 
+                <AnimatePresence mode="wait">
                 {formSuccess ? (
-                  <div className="ie-success-box space-y-2">
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.25 }}
+                    className="ie-success-box space-y-2"
+                  >
                     <div className="ie-success-box__icon">
                       <Check className="w-6 h-6" />
                     </div>
                     <p className="font-semibold text-sm">{contactForm.successTitle}</p>
                     <p className="text-xs text-[var(--text-s)]">{contactForm.successMessage}</p>
-                  </div>
+                  </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-3">
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    onSubmit={handleSubmit}
+                    className="space-y-3"
+                  >
                     <input
                       type="text"
                       required
@@ -292,12 +315,18 @@ export const ProjectDetail: React.FC = () => {
                       onChange={(e) => setMessage(e.target.value)}
                       className="ie-form-input resize-none"
                     />
-                    <button type="submit" className="ie-btn-primary w-full text-xs uppercase tracking-wider py-3">
+                    <motion.button
+                      type="submit"
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="ie-btn-primary w-full text-xs uppercase tracking-wider py-3"
+                    >
                       <Send className="w-4 h-4" />
                       {contactForm.submitLabel}
-                    </button>
-                  </form>
+                    </motion.button>
+                  </motion.form>
                 )}
+                </AnimatePresence>
 
                 <Link
                   to="/contact"
@@ -310,6 +339,6 @@ export const ProjectDetail: React.FC = () => {
           </aside>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

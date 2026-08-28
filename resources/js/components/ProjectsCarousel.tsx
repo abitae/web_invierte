@@ -4,6 +4,7 @@
  */
 
 import React, { useMemo } from "react";
+import { motion } from "motion/react";
 import type { Project } from "../types";
 import { ProjectCard } from "./ProjectCard";
 
@@ -57,12 +58,14 @@ export const ProjectsCarousel: React.FC<ProjectsCarouselProps> = ({
         }
       >
         {loopItems.map((project, index) => (
-          <div
+          <motion.div
             key={`${project.id}-${index}`}
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.25 }}
             className="shrink-0 w-[min(340px,calc(100vw-2rem))] sm:w-[min(360px,calc(50vw-1.5rem))] lg:w-[380px]"
           >
             <ProjectCard project={project} variant="home" layout="grid" />
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

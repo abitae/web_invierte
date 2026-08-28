@@ -5,8 +5,10 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { motion, AnimatePresence } from "motion/react";
 import { useApp } from "../../context/AppContext";
 import { ProjectCard } from "../../components/ProjectCard";
+import { fadeUp, staggerContainer } from "../../utils/motion";
 import {
   getUniqueProjectTypesFromProjects,
   getUniqueRegionsFromProjects,
@@ -267,21 +269,27 @@ export const Catalog: React.FC = () => {
                 </p>
               </div>
             ) : (
-              <div
-                className={`grid gap-4 ${
-                  viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" : "grid-cols-1"
-                }`}
-              >
-                {filteredProjects.map((project) => (
-                  <React.Fragment key={project.id}>
-                    <ProjectCard
-                      project={project}
-                      layout={viewMode}
-                      variant="catalog"
-                    />
-                  </React.Fragment>
-                ))}
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`${selectedType}-${selectedRegion}-${sortOption}-${searchQuery}-${viewMode}`}
+                  variants={staggerContainer(0.05)}
+                  initial="hidden"
+                  animate="visible"
+                  className={`grid gap-4 ${
+                    viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" : "grid-cols-1"
+                  }`}
+                >
+                  {filteredProjects.map((project) => (
+                    <motion.div key={project.id} variants={fadeUp}>
+                      <ProjectCard
+                        project={project}
+                        layout={viewMode}
+                        variant="catalog"
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
             )}
           </main>
         </div>

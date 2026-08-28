@@ -5,11 +5,13 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
 import { Phone, Mail, MapPin, Shield } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import { DEFAULT_SITE_SETTINGS } from "../../config/siteDefaults";
 import { BrandLogo } from "../BrandLogo";
 import type { CorporateChannel } from "../../types";
+import { fadeUp, staggerContainer, viewportOnce } from "../../utils/motion";
 
 function channelIcon(type: CorporateChannel["channelType"]) {
   if (type === "phone" || type === "whatsapp") return Phone;
@@ -42,9 +44,15 @@ export const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-14">
+      <motion.div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-14"
+        variants={staggerContainer(0.1)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+      >
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="space-y-4 md:col-span-1">
+          <motion.div variants={fadeUp} className="space-y-4 md:col-span-1">
             <Link to="/" className="inline-flex">
               <BrandLogo settings={settings} variant="footer" />
             </Link>
@@ -53,9 +61,9 @@ export const Footer: React.FC = () => {
                 {settings.footerDescription}
               </p>
             )}
-          </div>
+          </motion.div>
 
-          <div className="space-y-4">
+          <motion.div variants={fadeUp} className="space-y-4">
             <h3 className="ie-footer-heading">Navegación</h3>
             <ul className="space-y-2.5 text-sm text-[#94A3B8]">
               <li><Link to="/" className="hover:text-[var(--brand-green)] transition-colors">Inicio</Link></li>
@@ -63,9 +71,9 @@ export const Footer: React.FC = () => {
               <li><Link to="/about" className="hover:text-[var(--brand-green)] transition-colors">Quiénes somos</Link></li>
               <li><Link to="/contact" className="hover:text-[var(--brand-green)] transition-colors">Contacto</Link></li>
             </ul>
-          </div>
+          </motion.div>
 
-          <div className="space-y-4">
+          <motion.div variants={fadeUp} className="space-y-4">
             <h3 className="ie-footer-heading">Tipos de lote</h3>
             <ul className="space-y-2.5 text-sm text-[#94A3B8]">
               <li><Link to="/catalog?type=Playero" className="hover:text-white transition-colors">Playeros</Link></li>
@@ -73,9 +81,9 @@ export const Footer: React.FC = () => {
               <li><Link to="/catalog?type=Urbano" className="hover:text-white transition-colors">Urbanos</Link></li>
               <li><Link to="/catalog?type=Industrial" className="hover:text-white transition-colors">Industriales</Link></li>
             </ul>
-          </div>
+          </motion.div>
 
-          <div className="space-y-4">
+          <motion.div variants={fadeUp} className="space-y-4">
             <h3 className="ie-footer-heading">Contáctanos</h3>
             <ul className="space-y-3 text-sm text-[#CBD5E0]">
               {activeChannels.length > 0 ? (
@@ -110,14 +118,17 @@ export const Footer: React.FC = () => {
                 </>
               )}
             </ul>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/10 text-center md:text-left text-xs text-[#64748B]">
+        <motion.div
+          variants={fadeUp}
+          className="mt-12 pt-8 border-t border-white/10 text-center md:text-left text-xs text-[#64748B]"
+        >
           © {new Date().getFullYear()}{" "}
           {settings.siteName?.trim() || "Invierte Xpress"}. Todos los derechos reservados.
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </footer>
   );
 };

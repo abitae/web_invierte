@@ -5,9 +5,11 @@
 
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "motion/react";
 import { X } from "lucide-react";
 import { useApp } from "../context/AppContext";
 import { DEFAULT_HOME_ALERT } from "../config/siteDefaults";
+import { EASE_OUT } from "../utils/motion";
 
 const DISMISS_PREFIX = "lotes_home_alert_dismissed_";
 
@@ -43,13 +45,17 @@ export const HomeAlertModal: React.FC = () => {
     setOpen(false);
   };
 
-  if (!open) return null;
-
   const buttonHref = alert.buttonLink?.trim();
   const isExternal = buttonHref?.startsWith("http://") || buttonHref?.startsWith("https://");
 
   return (
-    <div
+    <AnimatePresence>
+      {open && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
       role="dialog"
       aria-modal="true"
@@ -62,7 +68,12 @@ export const HomeAlertModal: React.FC = () => {
         onClick={dismiss}
       />
 
-      <div className="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto bg-[var(--card-bg)] rounded-2xl border border-[var(--border)] shadow-2xl">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.94, y: 12 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.94, y: 12 }}
+        transition={{ duration: 0.3, ease: EASE_OUT }}
+        className="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto bg-[var(--card-bg)] rounded-2xl border border-[var(--border)] shadow-2xl">
         <button
           type="button"
           onClick={dismiss}
@@ -139,7 +150,9 @@ export const HomeAlertModal: React.FC = () => {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

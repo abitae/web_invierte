@@ -4,6 +4,7 @@
  */
 
 import React, { useMemo } from "react";
+import { motion } from "motion/react";
 import type { ExpertAdvisor } from "../types";
 
 const CARD_WIDTH = 300;
@@ -53,8 +54,10 @@ export const ExpertAdvisorsCarousel: React.FC<{ advisors: ExpertAdvisor[] }> = (
         }
       >
         {loopItems.map((advisor, index) => (
-          <article
+          <motion.article
             key={`${advisor.id}-${index}`}
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.25 }}
             className="shrink-0 w-[300px] ie-card overflow-hidden text-left group"
           >
             <div className="h-64 bg-[var(--bg-subtle)] overflow-hidden relative">
@@ -75,7 +78,7 @@ export const ExpertAdvisorsCarousel: React.FC<{ advisors: ExpertAdvisor[] }> = (
               </span>
               <p className="text-[var(--text-s)] text-xs leading-relaxed pt-2 line-clamp-4">{advisor.bio}</p>
             </div>
-          </article>
+          </motion.article>
         ))}
       </div>
     </div>

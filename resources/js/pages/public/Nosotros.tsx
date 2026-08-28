@@ -4,11 +4,13 @@
  */
 
 import React from "react";
+import { motion } from "motion/react";
 import { Landmark, Eye } from "lucide-react";
 import { useApp } from "../../context/AppContext";
 import { DEFAULT_ABOUT } from "../../config/siteDefaults";
 import { GuaranteeIcon } from "../../utils/siteContent";
 import { ExpertAdvisorsCarousel } from "../../components/ExpertAdvisorsCarousel";
+import { fadeUp, staggerContainer, viewportOnce, EASE_OUT } from "../../utils/motion";
 
 export const Nosotros: React.FC = () => {
   const { about } = useApp();
@@ -31,7 +33,12 @@ export const Nosotros: React.FC = () => {
           <div className="absolute inset-0 hero-banner-scrim-vertical" />
         </div>
 
-        <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE_OUT }}
+          className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center"
+        >
           <div className="hero-banner-content-panel rounded-2xl p-6 sm:p-10 space-y-4">
             <span className="ie-eyebrow justify-center block">{p.heroEyebrow}</span>
             <h1 className="hero-banner-title text-3xl sm:text-4xl lg:text-5xl">
@@ -41,27 +48,33 @@ export const Nosotros: React.FC = () => {
               {p.heroDescription}
             </p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="space-y-4 ie-card p-8 text-left">
+        <motion.div
+          variants={staggerContainer(0.12)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center"
+        >
+          <motion.div variants={fadeUp} className="space-y-4 ie-card p-8 text-left">
             <div className="w-12 h-12 bg-[var(--accent)]/10 rounded-2xl flex items-center justify-center text-[var(--accent)]">
               <Landmark className="w-6 h-6" />
             </div>
             <h2 className="font-display text-xl font-bold text-[var(--text-p)]">{p.missionHeading}</h2>
             <p className="text-[var(--text-s)] text-sm leading-relaxed">{p.missionDescription}</p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-4 ie-card p-8 text-left">
+          <motion.div variants={fadeUp} className="space-y-4 ie-card p-8 text-left">
             <div className="w-12 h-12 bg-[var(--brand-navy)]/10 rounded-2xl flex items-center justify-center text-[var(--brand-navy)]">
               <Eye className="w-6 h-6" />
             </div>
             <h2 className="font-display text-xl font-bold text-[var(--text-p)]">{p.visionHeading}</h2>
             <p className="text-[var(--text-s)] text-sm leading-relaxed">{p.visionDescription}</p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       <section className="bg-[var(--bg-subtle)] border-y border-[var(--border)] py-16 md:py-24">
@@ -72,17 +85,23 @@ export const Nosotros: React.FC = () => {
             <p className="text-[var(--text-s)] text-sm">{p.valuesDescription}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+          <motion.div
+            variants={staggerContainer(0.1)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left"
+          >
             {values.map((item) => (
-              <div key={item.id} className="space-y-3">
+              <motion.div key={item.id} variants={fadeUp} className="space-y-3">
                 <div className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)]">
                   <GuaranteeIcon name={item.icon} className="w-4 h-4 text-[var(--brand-green)] shrink-0" />
                   {item.title}
                 </div>
                 <p className="text-[var(--text-s)] text-xs leading-relaxed">{item.description}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
